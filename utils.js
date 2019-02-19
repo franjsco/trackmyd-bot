@@ -27,7 +27,7 @@ function templateHelp() {
 
 function templateUnauthorizedUser() {
   const msg = `Unauthorized user. 🤖  \n
-Clone the repository https://github.com/frab1t/lscanbot 
+Clone the repository https://github.com/frab1t/trackmyd-bot 
 and run the bot on your local network. 😎`;
   return msg;
 }
