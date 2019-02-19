@@ -1,0 +1,16 @@
+{
+    "app": {
+        "name": "trackmyd-bot",
+        "tokenTelegramBot": "--token--",
+        "authorizedUsers": [
+            123456
+        ]
+    },
+    "api": {
+        "baseURL": "http://localhost:3500/api",
+        "headers": {
+            "secret": "mysecret",
+            "Content-Type": "application/json"
+        }
+    }
+}
