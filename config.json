@@ -12,5 +12,11 @@
             "secret": "mysecret",
             "Content-Type": "application/json"
         }
+    },
+    "logger": {
+        "errorLogging": {
+            "filename": "error.log",
+            "level": "error"
+        }
     }
 }
