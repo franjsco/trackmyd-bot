@@ -1,5 +1,6 @@
 const Telebot = require('telebot');
 const config = require('./config');
+const utils = require('./utils');
 
 const bot = new Telebot({
   token: config.app.tokenBot,
@@ -8,12 +9,12 @@ const bot = new Telebot({
 
 
 bot.on('/start', (msg) => {
-  const name = 'user';
-  bot.sendMessage(msg.from.id, `hello ${name}`);
+  bot.sendMessage(msg.from.id, utils.templateStart(), { parseMode: 'Markdown' });
+  bot.event('/help', msg);
 });
 
 bot.on('/help', (msg) => {
-  bot.sendMessage(msg.from.id, 'help template');
+  bot.sendMessage(msg.from.id, utils.templateHelp(), { parseMode: 'Markdown' });
 });
 
 bot.on('/list', (msg) => {
