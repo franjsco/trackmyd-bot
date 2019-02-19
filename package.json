@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "trackmyd telegram bot",
   "main": "server.js",
-  "dependencies": {},
+  "dependencies": {
+    "bunyan": "^1.8.12",
+    "node-fetch": "^2.3.0",
+    "telebot": "^1.2.6"
+  },
   "devDependencies": {
     "eslint": "^5.14.1",
     "eslint-config-airbnb-base": "^13.1.0",
