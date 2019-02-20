@@ -10,7 +10,6 @@ https://github.com/frab1t/trackmyd-bot
 to configure the bot.
 
 Made with ❤️ by @frab1t`;
-
   return msg;
 }
 
@@ -21,7 +20,6 @@ function templateHelp() {
   /list - view device available.
   /add - add new device.
   /remove - remove device.`;
-
   return msg;
 }
 
@@ -32,6 +30,26 @@ and run the bot on your local network. 😎`;
   return msg;
 }
 
+function templatePosition(data) {
+  const msg = `📲 📡 ${data.name}
+-------------------------------------
+- 🏔️ Altitude: ${data.position.altitude}
+- ⚡️ Speed: ${data.position.speed}
+- 📏 Accurancy: ${data.position.accurancy}
+- 🔋 Battery: ${data.information.battery}
+- ⌚️ 2019-02-18T13:44:01`;
+
+  return msg;
+}
+
+function templateDevicesList(data) {
+  const msg = `📲 ${data.name}
+  ${data._id}`;
+  return msg;
+}
+
 module.exports.templateStart = templateStart;
 module.exports.templateHelp = templateHelp;
 module.exports.templateUnauthorizedUser = templateUnauthorizedUser;
+module.exports.templatePosition = templatePosition;
+module.exports.templateDevicesList = templateDevicesList;
