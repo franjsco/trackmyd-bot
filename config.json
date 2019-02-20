@@ -9,8 +9,11 @@
     "api": {
         "baseURL": "http://localhost:3500/api",
         "headers": {
-            "secret": "mysecret",
+            "Authorization": "Basic Y2xpZW50MjpjbGllbnQy",
             "Content-Type": "application/json"
+        },
+        "paths": {
+            "devices": "/devices/"
         }
     },
     "logger": {
