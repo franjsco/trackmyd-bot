@@ -1,5 +1,9 @@
 const config = require('./config');
 
+function convertTimestamp(timestamp) {
+  return new Date(timestamp * 1000).toISOString().slice(0, 19);
+}
+
 // template
 function templateStart() {
   const msg = `* Welcome to ${config.app.name} 📱📡*\n 
@@ -33,12 +37,12 @@ and run the bot on your local network. 😎`;
 function templatePosition(data) {
   const msg = `📲 📡 *${data.name}*
 
-  🏔️ _Altitude_: *${data.position.altitude}  m.*
-  ⚡️ _Speed_: *${data.position.speed} m/h*
-  📏 _Accurancy_: *${data.position.accurancy} m.*
+  🏔️ _Altitude_: *${Math.trunc(data.position.altitude)} m*
+  ⚡️ _Speed_: *${data.position.speed} m/s*
+  📏 _Accurancy_: *${Math.trunc(data.position.accurancy)} m*
   🔋 _Battery_: *${data.information.battery}%*
 
-  ⌚️ 2019-02-18T13:44:01`;
+_Last Update_: ${convertTimestamp(data.lastUpdate)}`;
 
   return msg;
 }
@@ -55,9 +59,46 @@ function templateError(data) {
   return msg;
 }
 
+function templateDeviceNotFound(data) {
+  const msg = `Device _"${data}"_ not found`;
+  return msg;
+}
+
+function templateAddDeviceURL(data) {
+  const msg = `${config.api.baseURL}${config.api.paths.devices}${data._id}`;
+  return msg;
+}
+
+function templateAddDeviceHeader() {
+  const msg = JSON.stringify(config.api.headers);
+  return msg;
+}
+
+function templateAddDeviceBody() {
+  const msg = `{
+    "position": {
+      "latitude": %LAT,
+      "longtitude": %LON,
+      "altitude": %ALT,
+      "speed": %SPD,
+      "accurancy": %ACC
+    },
+    "information": {
+      "battery": %BATT
+    },
+    "lastUpdate": %TIMESTAMP
+  }`;
+
+  return msg;
+}
+
 module.exports.templateStart = templateStart;
 module.exports.templateHelp = templateHelp;
 module.exports.templateUnauthorizedUser = templateUnauthorizedUser;
 module.exports.templatePosition = templatePosition;
 module.exports.templateDevicesList = templateDevicesList;
 module.exports.templateError = templateError;
+module.exports.templateDeviceNotFound = templateDeviceNotFound;
+module.exports.templateAddDeviceURL = templateAddDeviceURL;
+module.exports.templateAddDeviceHeader = templateAddDeviceHeader;
+module.exports.templateAddDeviceBody = templateAddDeviceBody;
