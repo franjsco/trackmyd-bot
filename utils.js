@@ -50,8 +50,14 @@ function templateDevicesList(data) {
   return msg;
 }
 
+function templateError(data) {
+  const msg = 'Error, check the server.log';
+  return msg;
+}
+
 module.exports.templateStart = templateStart;
 module.exports.templateHelp = templateHelp;
 module.exports.templateUnauthorizedUser = templateUnauthorizedUser;
 module.exports.templatePosition = templatePosition;
 module.exports.templateDevicesList = templateDevicesList;
+module.exports.templateError = templateError;
