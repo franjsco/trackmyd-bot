@@ -31,19 +31,21 @@ and run the bot on your local network. 😎`;
 }
 
 function templatePosition(data) {
-  const msg = `📲 📡 ${data.name}
--------------------------------------
-- 🏔️ Altitude: ${data.position.altitude}
-- ⚡️ Speed: ${data.position.speed}
-- 📏 Accurancy: ${data.position.accurancy}
-- 🔋 Battery: ${data.information.battery}
-- ⌚️ 2019-02-18T13:44:01`;
+  const msg = `📲 📡 *${data.name}*
+
+  🏔️ _Altitude_: *${data.position.altitude}  m.*
+  ⚡️ _Speed_: *${data.position.speed} m/h*
+  📏 _Accurancy_: *${data.position.accurancy} m.*
+  🔋 _Battery_: *${data.information.battery}%*
+
+  ⌚️ 2019-02-18T13:44:01`;
 
   return msg;
 }
 
 function templateDevicesList(data) {
-  const msg = `📲 ${data.name}
+  const msg = `📲 *${data.name}*
+  ----
   ${data._id}`;
   return msg;
 }
