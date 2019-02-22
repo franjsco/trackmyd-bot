@@ -34,11 +34,21 @@ bot.on('/list', (msg) => {
   }
 
   api.getDevices()
-    .then(res => res.json())
+    .then((res) => {
+      console.log(res.status);
+      if (res.status === 200) {
+        return res.json();
+      }
+      return null;
+    })
     .then((json) => {
-      json.forEach((elem) => {
-        bot.sendMessage(msg.from.id, utils.templateDevicesList(elem), { parseMode: 'Markdown' });
-      });
+      if (json) {
+        json.forEach((elem) => {
+          bot.sendMessage(msg.from.id, utils.templateDevicesList(elem), { parseMode: 'Markdown' });
+        });
+      } else {
+        bot.sendMessage(msg.from.id, utils.templateDeviceNotFound());
+      }
     })
     .catch((err) => {
       bot.sendMessage(msg.from.id, utils.templateError());
@@ -52,15 +62,24 @@ bot.on('/position', (msg) => {
   }
 
   api.getDevices()
-    .then(res => res.json())
+    .then((res) => {
+      console.log(res.status);
+      if (res.status === 200) {
+        return res.json();
+      }
+      return null;
+    })
     .then((devicesJSON) => {
-      const devices = [];
-      devicesJSON.forEach((device) => {
-        devices.push(device.name);
-      });
+      if (devicesJSON) {
+        const devices = [];
+        devicesJSON.forEach((device) => {
+          devices.push(device.name);
+        });
+        const replyMarkup = bot.keyboard([devices], { resize: true, once: true });
+        return bot.sendMessage(msg.from.id, 'Select device', { ask: 'devicePosition', replyMarkup });
+      }
 
-      const replyMarkup = bot.keyboard([devices], { resize: true, once: true });
-      bot.sendMessage(msg.from.id, 'Select device', { ask: 'devicePosition', replyMarkup });
+      return bot.sendMessage(msg.from.id, utils.templateDeviceNotFound());
     })
     .catch((err) => {
       bot.sendMessage(msg.from.id, utils.templateError());
