@@ -17,9 +17,9 @@
         }
     },
     "logger": {
-        "errorLogging": {
-            "filename": "error.log",
-            "level": "error"
+        "infoLogging": {
+            "filename": "server.log",
+            "level": "info"
         }
     }
 }
