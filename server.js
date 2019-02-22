@@ -5,6 +5,7 @@ const utils = require('./utils');
 const auth = require('./auth');
 const api = require('./api');
 const logger = require('./logger');
+const templates = require('./templates');
 
 logger.logConsole('Server started');
 logger.logInfo('Server started');
@@ -16,129 +17,105 @@ const bot = new Telebot({
 
 bot.on('/start', (msg) => {
   if (!auth(msg.from.id)) {
-    return bot.sendMessage(msg.from.id, utils.templateUnauthorizedUser(), { parseMode: 'Markdown' });
+    return bot.sendMessage(msg.from.id, templates.unauthorizedUser(), { parseMode: 'Markdown' });
   }
-  bot.sendMessage(msg.from.id, utils.templateStart(), { parseMode: 'Markdown' });
+  bot.sendMessage(msg.from.id, templates.welcome(), { parseMode: 'Markdown' });
   bot.event('/help', msg);
 });
 
 bot.on('/help', (msg) => {
   if (!auth(msg.from.id)) {
-    return bot.sendMessage(msg.from.id, utils.templateUnauthorizedUser(), { parseMode: 'Markdown' });
+    return bot.sendMessage(msg.from.id, templates.unauthorizedUser(), { parseMode: 'Markdown' });
   }
-  bot.sendMessage(msg.from.id, utils.templateHelp(), { parseMode: 'Markdown' });
+  bot.sendMessage(msg.from.id, templates.help(), { parseMode: 'Markdown' });
 });
 
 bot.on('/list', (msg) => {
   if (!auth(msg.from.id)) {
-    return bot.sendMessage(msg.from.id, utils.templateUnauthorizedUser(), { parseMode: 'Markdown' });
+    return bot.sendMessage(msg.from.id, templates.unauthorizedUser(), { parseMode: 'Markdown' });
   }
 
   api.getDevices()
     .then((res) => {
-      if (res.status === 200) {
-        return res.json();
+      if (res instanceof Error) {
+        throw res;
       }
-      return null;
-    })
-    .then((json) => {
-      if (json) {
-        json.forEach((elem) => {
-          bot.sendMessage(msg.from.id, utils.templateDevicesList(elem), { parseMode: 'Markdown' });
-        });
-      } else {
-        bot.sendMessage(msg.from.id, utils.templateDeviceNotFound());
-      }
+      res.forEach((elem) => {
+        bot.sendMessage(msg.from.id, templates.deviceList(elem), { parseMode: 'Markdown' });
+      });
     })
     .catch((err) => {
-      bot.sendMessage(msg.from.id, utils.templateError());
-      logger.logError(err);
+      utils.sendErrorMessage(err, msg);
     });
 });
 
 bot.on('/position', (msg) => {
   if (!auth(msg.from.id)) {
-    return bot.sendMessage(msg.from.id, utils.templateUnauthorizedUser(), { parseMode: 'Markdown' });
+    return bot.sendMessage(msg.from.id, templates.unauthorizedUser(), { parseMode: 'Markdown' });
   }
 
   api.getDevices()
     .then((res) => {
-      if (res.status === 200) {
-        return res.json();
-      }
-      return null;
-    })
-    .then((json) => {
-      if (json) {
-        const devices = [];
-        json.forEach((device) => {
-          devices.push(device.name);
-        });
-
-        const replyMarkup = bot.keyboard([devices], { resize: true, once: true });
-        return bot.sendMessage(msg.from.id, 'Select device', { ask: 'devicePosition', replyMarkup });
+      if (res instanceof Error) {
+        throw res;
       }
 
-      return bot.sendMessage(msg.from.id, utils.templateDeviceNotFound());
+      const devices = [];
+      res.forEach((device) => {
+        devices.push(device.name);
+      });
+
+      const replyMarkup = bot.keyboard([devices], { resize: true, once: true });
+      bot.sendMessage(msg.from.id, 'Select device', { ask: 'devicePosition', replyMarkup });
     })
     .catch((err) => {
-      bot.sendMessage(msg.from.id, utils.templateError());
-      logger.logError(err);
+      utils.sendErrorMessage(err, msg);
     });
 });
 
 bot.on('ask.devicePosition', (msg) => {
   if (!auth(msg.from.id)) {
-    return bot.sendMessage(msg.from.id, utils.templateUnauthorizedUser(), { parseMode: 'Markdown' });
+    return bot.sendMessage(msg.from.id, templates.unauthorizedUser(), { parseMode: 'Markdown' });
   }
 
   api.getInfoDevice(msg.text)
     .then((res) => {
-      if (res.ok) {
-        return res.json();
+      if (res instanceof Error) {
+        throw res;
       }
-      return null;
-    })
-    .then((json) => {
-      if (json) {
-        bot.sendLocation(msg.from.id, [json.position.latitude, json.position.longtitude]);
-        bot.sendMessage(msg.from.id, utils.templatePosition(json), { parseMode: 'Markdown' });
-      } else {
-        bot.sendMessage(msg.from.id, utils.templateDeviceNotFound(msg.text), { parseMode: 'Markdown' });
-      }
+
+      bot.sendLocation(msg.from.id, [res.position.latitude, res.position.longtitude]);
+      bot.sendMessage(msg.from.id, templates.position(res), { parseMode: 'Markdown' });
     })
     .catch((err) => {
-      bot.sendMessage(msg.from.id, utils.templateError());
-      logger.logError(err);
+      utils.sendErrorMessage(err, msg);
     });
 });
 
 bot.on('/add', (msg) => {
   if (!auth(msg.from.id)) {
-    return bot.sendMessage(msg.from.id, utils.templateUnauthorizedUser(), { parseMode: 'Markdown' });
+    return bot.sendMessage(msg.from.id, templates.unauthorizedUser(), { parseMode: 'Markdown' });
   }
   bot.sendMessage(msg.from.id, 'insert name', { ask: 'addDevice' });
 });
 
 bot.on('ask.addDevice', (msg) => {
   if (!auth(msg.from.id)) {
-    return bot.sendMessage(msg.from.id, utils.templateUnauthorizedUser(), { parseMode: 'Markdown' });
+    return bot.sendMessage(msg.from.id, templates.unauthorizedUser(), { parseMode: 'Markdown' });
   }
+
   api.addDevice(msg.text)
     .then((res) => {
-      if (res.ok) {
-        return res.json();
+      if (res instanceof Error) {
+        throw res;
       }
-      return null;
-    })
-    .then((json) => {
-      bot.sendMessage(msg.from.id, utils.templateAddDeviceURL(json));
-      bot.sendMessage(msg.from.id, utils.templateAddDeviceHeader());
-      bot.sendMessage(msg.from.id, utils.templateAddDeviceBody());
+
+      bot.sendMessage(msg.from.id, templates.addDeviceURL(res));
+      bot.sendMessage(msg.from.id, templates.addDeviceHeader());
+      bot.sendMessage(msg.from.id, templates.addDeviceBody());
     })
     .catch((err) => {
-      bot.sendMessage(msg.from.id, utils.templateError());
-      logger.logError(err);
+      utils.sendErrorMessage(err, msg);
     });
 });
 
@@ -148,23 +125,25 @@ bot.on('/remove', (msg) => {
 
 bot.on('ask.removeDevice', (msg) => {
   api.removeDevice(msg.text)
-    .then(() => {
-      bot.sendMessage(msg.from.id, 'Device Deleted');
+    .then((res) => {
+      if (res instanceof Error) {
+        throw res;
+      }
+      bot.sendMessage(msg.from.id, 'Device Removed');
     })
     .catch((err) => {
-      bot.sendMessage(msg.from.id, utils.templateError());
-      logger.logError(err);
+      utils.sendErrorMessage(err, msg);
     });
 });
 
 bot.start();
 
-process.on('uncaughtException', (err) => {
-  logger.logError(err);
-});
-
 process.on('SIGINT', () => {
   logger.logInfo('Server stopped');
   logger.logConsole('Server stopped');
   process.exit(0);
+});
+
+process.on('uncaughtException', (err) => {
+  logger.logError(err);
 });
