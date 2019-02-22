@@ -60,7 +60,12 @@ function templateError(data) {
 }
 
 function templateDeviceNotFound(data) {
-  const msg = `Device _"${data}"_ not found`;
+  let msg;
+  if (data) {
+    msg = `Device _"${data}"_ not found`;
+  } else {
+    msg = 'Devices not found';
+  }
   return msg;
 }
 
