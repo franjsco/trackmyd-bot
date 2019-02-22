@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 const Telebot = require('telebot');
 const config = require('./config');
 const utils = require('./utils');
@@ -35,7 +36,6 @@ bot.on('/list', (msg) => {
 
   api.getDevices()
     .then((res) => {
-      console.log(res.status);
       if (res.status === 200) {
         return res.json();
       }
@@ -63,18 +63,18 @@ bot.on('/position', (msg) => {
 
   api.getDevices()
     .then((res) => {
-      console.log(res.status);
       if (res.status === 200) {
         return res.json();
       }
       return null;
     })
-    .then((devicesJSON) => {
-      if (devicesJSON) {
+    .then((json) => {
+      if (json) {
         const devices = [];
-        devicesJSON.forEach((device) => {
+        json.forEach((device) => {
           devices.push(device.name);
         });
+
         const replyMarkup = bot.keyboard([devices], { resize: true, once: true });
         return bot.sendMessage(msg.from.id, 'Select device', { ask: 'devicePosition', replyMarkup });
       }
@@ -136,7 +136,7 @@ bot.on('ask.addDevice', (msg) => {
       bot.sendMessage(msg.from.id, utils.templateAddDeviceHeader());
       bot.sendMessage(msg.from.id, utils.templateAddDeviceBody());
     })
-    .catch((err) => { 
+    .catch((err) => {
       bot.sendMessage(msg.from.id, utils.templateError());
       logger.logError(err);
     });
@@ -148,7 +148,7 @@ bot.on('/remove', (msg) => {
 
 bot.on('ask.removeDevice', (msg) => {
   api.removeDevice(msg.text)
-    .then((res) => {
+    .then(() => {
       bot.sendMessage(msg.from.id, 'Device Deleted');
     })
     .catch((err) => {
