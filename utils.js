@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const config = require('./config');
 
 // utils functions
@@ -55,7 +56,7 @@ function templateDevicesList(data) {
   return msg;
 }
 
-function templateError(data) {
+function templateError() {
   const msg = 'Error, check the server.log';
   return msg;
 }
