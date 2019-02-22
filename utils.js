@@ -1,5 +1,6 @@
 const config = require('./config');
 
+// utils functions
 function convertTimestamp(timestamp) {
   return new Date(timestamp * 1000).toISOString().slice(0, 19);
 }
@@ -75,7 +76,8 @@ function templateAddDeviceURL(data) {
 }
 
 function templateAddDeviceHeader() {
-  const msg = JSON.stringify(config.api.headers);
+  const head = config.api.headers;
+  const msg = `Authorization: ${head.Authorization} \nContent-Type: ${head['Content-Type']}`;
   return msg;
 }
 
