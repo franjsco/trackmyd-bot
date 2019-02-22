@@ -1,9 +1,10 @@
 const fetch = require('node-fetch');
 const { api } = require('./config');
+const logger = require('./logger');
 
 const devicesPath = `${api.baseURL}${api.paths.devices}`;
 
-function getDevices() {
+function getDevicesAPI() {
   const init = {
     method: 'GET',
     headers: api.headers,
@@ -12,7 +13,26 @@ function getDevices() {
   return fetch(devicesPath, init);
 }
 
-function getInfoDevice(name) {
+function getDevices() {
+  return getDevicesAPI()
+    .then((res) => {
+      if (res.status === 404) {
+        throw new Error('DevicesNotFound');
+      } else if (!res.ok) {
+        throw new Error(res);
+      }
+
+      return res.json();
+    })
+    .then(json => json)
+    .catch((err) => {
+      logger.logError(err);
+      return err;
+    });
+}
+
+
+function getInfoDeviceAPI(name) {
   const init = {
     method: 'GET',
     headers: api.headers,
@@ -22,7 +42,25 @@ function getInfoDevice(name) {
   return fetch(path, init);
 }
 
-function addDevice(name) {
+function getInfoDevice(deviceId) {
+  return getInfoDeviceAPI(deviceId)
+    .then((res) => {
+      if (res.status === 404) {
+        throw new Error('DevicesNotFound');
+      } else if (!res.ok) {
+        throw new Error(res);
+      }
+
+      return res.json();
+    })
+    .then(json => json)
+    .catch((err) => {
+      logger.logError(err);
+      return err;
+    });
+}
+
+function addDeviceAPI(name) {
   const body = {
     name,
   };
@@ -36,7 +74,23 @@ function addDevice(name) {
   return fetch(devicesPath, init);
 }
 
-function removeDevice(id) {
+function addDevice(name) {
+  return addDeviceAPI(name)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(res);
+      }
+
+      return res.json();
+    })
+    .then(json => json)
+    .catch((err) => {
+      logger.logError(err);
+      return err;
+    });
+}
+
+function removeDeviceAPI(id) {
   const init = {
     method: 'DELETE',
     headers: api.headers,
@@ -46,6 +100,21 @@ function removeDevice(id) {
   return fetch(path, init);
 }
 
+function removeDevice(deviceId) {
+  return removeDeviceAPI(deviceId)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(res);
+      }
+
+      return res.status;
+    })
+    .then(json => json)
+    .catch((err) => {
+      logger.logError(err);
+      return err;
+    });
+}
 
 module.exports.getDevices = getDevices;
 module.exports.getInfoDevice = getInfoDevice;
