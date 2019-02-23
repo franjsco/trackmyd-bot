@@ -53,7 +53,12 @@ function getInfoDevice(deviceId) {
 
       return res.json();
     })
-    .then(json => json)
+    .then((json) => {
+      if (!Object.prototype.hasOwnProperty.call(json, 'position')) {
+        throw new Error('PositionNotFound');
+      }
+      return json;
+    })
     .catch((err) => {
       logger.logError(err);
       return err;

@@ -97,6 +97,11 @@ function devicesNotFound(data) {
   return msg;
 }
 
+function positionNotFound() {
+  const msg = 'Position not found';
+  return msg;
+}
+
 module.exports.unauthorizedUser = unauthorizedUser;
 module.exports.welcome = welcome;
 module.exports.help = help;
@@ -107,3 +112,4 @@ module.exports.addDeviceHeader = addDeviceHeader;
 module.exports.addDeviceBody = addDeviceBody;
 module.exports.error = error;
 module.exports.devicesNotFound = devicesNotFound;
+module.exports.positionNotFound = positionNotFound;

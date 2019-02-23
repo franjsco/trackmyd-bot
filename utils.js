@@ -8,6 +8,9 @@ function sendErrorMessage(error, msgBot) {
     case 'DeviceNotFound':
       msgBot.reply.text(templates.devicesNotFound(msgBot.text));
       break;
+    case 'PositionNotFound':
+      msgBot.reply.text(templates.positionNotFound());
+      break;
     default:
       msgBot.reply.text(templates.error());
   }
