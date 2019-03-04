@@ -21,21 +21,21 @@ In order to use trackmyd-bot, in addiction to the configuration of the trackmyd-
 
 Before requesting the position to the bot you need to add a new device and configure it.
 
-### Following the basic steps to configure it:
+#### Configuration:
 
 1. **Add a new device.**
 
-    - Send the `/add` command to the bot. You will be prompted to add the device name. 
+    Send the `/add` command to the bot. You will be prompted to add the device name. 
 
 2. **Configure GPSLogger on Android.**
 
-    - Once confirmed the device name, the bot will return 3 messages:
-            
-        - URL (full-path including the device ID)
-        - HEADER (HTTP header, used for authentication to APIs)
-        - BODY (HTTP body with the parameters that will be automatically evaluated by GPSLogger).
+    Once confirmed the device name, the bot will return 3 messages:
+
+    - URL (full-path including the device ID)
+    - HEADER (HTTP header, used for authentication to APIs)
+    - BODY (HTTP body with the parameters that will be automatically evaluated by GPSLogger).
     
-        Take the values ​​and insert them in the GPSLogger app under "Logging details > Log to custom URL" specifying method http = 'PATCH' 
+    Take the values ​​and insert them in the GPSLogger app under "Logging details > Log to custom URL" specifying method http = 'PATCH' 
 
     - Press "Start Logging" on GPSLogger.
 
@@ -58,6 +58,6 @@ Before requesting the position to the bot you need to add a new device and confi
 8. Start with `npm start`.
 
 
-The bot was created for fun (and learning).
+The bot was created for fun.
  
  Made with ❤️ by Francesco Esposito ([@frab1t](https://github.com/frab1t))
