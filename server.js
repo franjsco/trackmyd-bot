@@ -37,9 +37,6 @@ bot.on('/list', (msg) => {
 
   api.getDevices()
     .then((res) => {
-      if (res instanceof Error) {
-        throw res;
-      }
       res.forEach((elem) => {
         bot.sendMessage(msg.from.id, templates.deviceList(elem), { parseMode: 'Markdown' });
       });
@@ -56,10 +53,6 @@ bot.on('/position', (msg) => {
 
   api.getDevices()
     .then((res) => {
-      if (res instanceof Error) {
-        throw res;
-      }
-
       const devices = [];
       res.forEach((device) => {
         devices.push(device.name);
@@ -80,10 +73,6 @@ bot.on('ask.devicePosition', (msg) => {
 
   api.getInfoDevice(msg.text)
     .then((res) => {
-      if (res instanceof Error) {
-        throw res;
-      }
-
       bot.sendLocation(msg.from.id, [res.position.latitude, res.position.longtitude]);
       bot.sendMessage(msg.from.id, templates.position(res), { parseMode: 'Markdown' });
     })
@@ -106,10 +95,6 @@ bot.on('ask.addDevice', (msg) => {
 
   api.addDevice(msg.text)
     .then((res) => {
-      if (res instanceof Error) {
-        throw res;
-      }
-
       bot.sendMessage(msg.from.id, templates.addDeviceURL(res));
       bot.sendMessage(msg.from.id, templates.addDeviceHeader());
       bot.sendMessage(msg.from.id, templates.addDeviceBody());

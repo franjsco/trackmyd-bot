@@ -27,7 +27,7 @@ function getDevices() {
     .then(json => json)
     .catch((err) => {
       logger.logError(err);
-      return err;
+      throw err;
     });
 }
 
@@ -61,7 +61,7 @@ function getInfoDevice(deviceId) {
     })
     .catch((err) => {
       logger.logError(err);
-      return err;
+      throw err;
     });
 }
 
@@ -91,7 +91,7 @@ function addDevice(name) {
     .then(json => json)
     .catch((err) => {
       logger.logError(err);
-      return err;
+      throw err;
     });
 }
 
@@ -117,7 +117,7 @@ function removeDevice(deviceId) {
     .then(json => json)
     .catch((err) => {
       logger.logError(err);
-      return err;
+      throw err;
     });
 }
 
