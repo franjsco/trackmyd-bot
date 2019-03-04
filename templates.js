@@ -42,7 +42,7 @@ function deviceList(data) {
 
 function position(data) {
   const msg = `📲 📡 *${data.name}*
-
+----
   🏔️ _Altitude_: *${Math.trunc(data.position.altitude)} m*
   ⚡️ _Speed_: *${data.position.speed} m/s*
   📏 _Accurancy_: *${Math.trunc(data.position.accurancy)} m*
