@@ -2,6 +2,8 @@
 
 trackmyd-bot - a telegram bot that locates your devices
 
+<img src="screenshot.png" height="400">
+
 ## Architecture
 
 **trackmyd-bot** uses the [**trackmyd-api**](https://github.com/frab1t/trackmyd-api) project APIs to get device locations. 
