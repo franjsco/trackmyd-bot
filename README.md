@@ -1,8 +1,10 @@
 # trackmyd-bot
 
-trackmyd-bot - a telegram bot that locates your devices
+A telegram bot to track your devices.
 
 <img src="screenshot.png" height="400">
+
+This bot is written in Node.js
 
 ## Architecture
 
