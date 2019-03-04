@@ -23,8 +23,6 @@ In order to use trackmyd-bot, in addiction to the configuration of the trackmyd-
 
 Before requesting the position to the bot you need to add a new device and configure it.
 
-#### Configuration:
-
 1. **Add a new device.**
 
     Send the `/add` command to the bot. You will be prompted to add the device name. 
@@ -37,7 +35,7 @@ Before requesting the position to the bot you need to add a new device and confi
     - HEADER (HTTP header, used for authentication to APIs)
     - BODY (HTTP body with the parameters that will be automatically evaluated by GPSLogger).
     
-    Take the values ​​and insert them in the GPSLogger app under "Logging details > Log to custom URL" specifying method http = 'PATCH' 
+    Take the values ​​and insert them in the GPSLogger app under "Logging details > Log to custom URL" specifying HTTP Method = 'PATCH' 
 
     - Press "Start Logging" on GPSLogger.
 
