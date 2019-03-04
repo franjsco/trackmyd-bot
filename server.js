@@ -111,9 +111,6 @@ bot.on('/remove', (msg) => {
 bot.on('ask.removeDevice', (msg) => {
   api.removeDevice(msg.text)
     .then((res) => {
-      if (res instanceof Error) {
-        throw res;
-      }
       bot.sendMessage(msg.from.id, 'Device Removed');
     })
     .catch((err) => {
