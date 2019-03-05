@@ -25,7 +25,7 @@ Before requesting the position to the bot you need to add a new device and confi
 
 1. **Add a new device.**
 
-    Send the `/add` command to the bot. You will be prompted to add the device name. 
+    Send the `/add` command to the bot. You will be prompted to add the device name.
 
 2. **Configure GPSLogger on Android.**
 
@@ -35,9 +35,9 @@ Before requesting the position to the bot you need to add a new device and confi
     - HEADER (HTTP header, used for authentication to APIs)
     - BODY (HTTP body with the parameters that will be automatically evaluated by GPSLogger).
     
-    Take the values ​​and insert them in the GPSLogger app under "Logging details > Log to custom URL" specifying HTTP Method = 'PATCH' 
+    Take the values ​​and insert them in the GPSLogger app under "Logging details > Log to custom URL" specifying HTTP Method = 'PATCH'. 
 
-    - Press "Start Logging" on GPSLogger.
+    Then press "Start Logging" on GPSLogger.
 
 3. **Request the position at the bot**
 
@@ -58,6 +58,4 @@ Before requesting the position to the bot you need to add a new device and confi
 8. Start with `npm start`.
 
 
-The bot was created for fun.
- 
  Made with ❤️ by Francesco Esposito ([@frab1t](https://github.com/frab1t))
