@@ -57,5 +57,9 @@ Before requesting the position to the bot you need to add a new device and confi
 7. Configure Basic Authentication in (app.api.headers) into `config.json`.
 8. Start with `npm start`.
 
+### License
 
- Made with ❤️ by Francesco Esposito ([@frab1t](https://github.com/frab1t))
+GPLv3
+
+---
+Made with ❤️ by Francesco Esposito ([@frab1t](https://github.com/frab1t))
