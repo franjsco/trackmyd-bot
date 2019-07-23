@@ -8,7 +8,7 @@ function welcome() {
 A bot to track your devices with GPS.
 
 Please, read the README on 
-https://github.com/frsposito/trackmyd-bot
+[trackmyd-bot](https://github.com/frsposito/trackmyd-bot) repository
 to configure the bot.
 
 Made with ❤️ by Francesco Esposito`;
