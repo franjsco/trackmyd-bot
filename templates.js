@@ -8,7 +8,7 @@ function welcome() {
 A bot to track your devices with GPS.
 
 Please, read the README on 
-[trackmyd-bot](https://github.com/frsposito/trackmyd-bot) repository
+[trackmyd-bot](https://github.com/franjsco/trackmyd-bot) repository
 to configure the bot.
 
 Made with ❤️ by Francesco Esposito`;
@@ -28,7 +28,7 @@ function help() {
 
 function unauthorizedUser() {
   const msg = `Unauthorized user. 🤖  \n
-Clone the repository https://github.com/frsposito/trackmyd-bot 
+Clone the repository https://github.com/franjsco/trackmyd-bot 
 and run the bot on your local network. 😎`;
   return msg;
 }

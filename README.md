@@ -8,9 +8,9 @@ This bot is written in Node.js
 
 ## Architecture
 
-**trackmyd-bot** uses the [**trackmyd-api**](https://github.com/frsposito/trackmyd-api) project APIs to get device locations. 
+**trackmyd-bot** uses the [**trackmyd-api**](https://github.com/franjsco/trackmyd-api) project APIs to get device locations. 
 
-To configure the server, refer to the  [**trackmyd-api**](https://github.com/frsposito/trackmyd-api) repository.
+To configure the server, refer to the  [**trackmyd-api**](https://github.com/franjsco/trackmyd-api) repository.
 
 
 In order to use trackmyd-bot, in addiction to the configuration of the trackmyd-api, it’s also necessary to configure [**GPSLogger**](https://github.com/mendhak/gpslogger), an open-source application that allows sending location through HTTP calls.
@@ -62,4 +62,4 @@ Before requesting the position to the bot you need to add a new device and confi
 GPLv3
 
 ---
-Made with ❤️ by Francesco Esposito ([@frsposito](https://github.com/frsposito))
+Made with ❤️ by Francesco Esposito ([@franjsco](https://github.com/franjsco))

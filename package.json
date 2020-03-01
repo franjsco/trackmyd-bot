@@ -19,12 +19,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/frsposito/trackmyd-bot.git"
+    "url": "git+https://github.com/franjsco/trackmyd-bot.git"
   },
-  "author": "frsposito",
+  "author": "franjsco",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/frsposito/trackmyd-bot/issues"
+    "url": "https://github.com/franjsco/trackmyd-bot/issues"
   },
-  "homepage": "https://github.com/frsposito/trackmyd-bot#readme"
+  "homepage": "https://github.com/franjsco/trackmyd-bot#readme"
 }
