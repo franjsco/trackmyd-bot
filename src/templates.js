@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-const config = require('./config');
+const config = require('../config');
 const utils = require('./utils');
 
 

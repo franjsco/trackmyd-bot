@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 const bunyan = require('bunyan');
-const config = require('./config.json');
+const config = require('../config.json');
 
 const log = bunyan.createLogger({
   name: config.app.name,

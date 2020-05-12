@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 const Telebot = require('telebot');
-const config = require('./config');
+const config = require('../config');
 const utils = require('./utils');
 const auth = require('./auth');
 const api = require('./api');
@@ -17,6 +17,8 @@ const bot = new Telebot({
 
 bot.on('/start', (msg) => {
   if (!auth(msg.from.id)) {
+    // eslint-disable-next-line no-console
+    console.log(`USER ID: ${msg.from.id}`);
     return bot.sendMessage(msg.from.id, templates.unauthorizedUser(), { parseMode: 'Markdown' });
   }
   bot.sendMessage(msg.from.id, templates.welcome(), { parseMode: 'Markdown' });
@@ -117,6 +119,7 @@ bot.on('ask.removeDevice', (msg) => {
       utils.sendErrorMessage(err, msg);
     });
 });
+
 
 bot.start();
 

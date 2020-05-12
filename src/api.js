@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const { api } = require('./config');
+const { api } = require('../config.json');
 const logger = require('./logger');
 
 const devicesPath = `${api.baseURL}${api.paths.devices}`;
